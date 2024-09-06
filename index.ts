@@ -1,14 +1,23 @@
 import express from 'express'
 import dotenv from "dotenv"
 import mongoose from 'mongoose'
-
 import userRouter from "./src/routers/user"
+import cors from "cors"
 dotenv.config()
 
-const app = express()
+
 
 const dbURL = `mongodb+srv://${process.env.DATABASENAME}:${process.env.DATABASEPASSWORD}@cluster0.p45nm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 
+
+const app = express()
+
+
+app.use(express.json())
+app.use(cors())
+
+
+app.use('/auth',userRouter)
 const connectDb = async () => {
 
     try {
