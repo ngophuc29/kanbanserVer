@@ -23,6 +23,11 @@ const UserShema = new Schema({
         type: Date,
         default: Date.now()
     }
+    ,
+    rule:{
+        type: Number,
+        default: 1
+    }
 });
 
 const UserModel=mongoose.model("users",UserShema);
