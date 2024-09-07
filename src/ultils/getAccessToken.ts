@@ -17,6 +17,6 @@ export const getAccessToken = async (payload: Payload) => {
         throw new Error('SECRET_KEY is not defined in the environment variables');
     }
 
-    const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1h' });
+    const token = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: '1d' });
     return token;
 };
