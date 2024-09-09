@@ -199,4 +199,39 @@ const loginWithGoogle = async (req: any, res: any) => {
         })
     }
 }
-export { register, login, loginWithGoogle }
+
+
+const refeshToken = async ( req: any, res: any) => {
+
+
+    const {id}=req.query;
+    console.log(id)
+
+    try {
+
+        const user =await UserModel.findById(id);
+
+        if(!user){
+
+            throw new Error("User not found")
+        }
+        const token = await  getAccessToken({
+            _id: id,
+            email: user.email,
+            rule:user.rule
+        })
+        
+        res.status(200).json({
+            message:"refeshToken",
+            data:token
+        })
+    } catch (error :any) {
+        res.status(404).json({
+
+            message:error.message
+        });
+        
+    }
+
+}
+export { register, login, loginWithGoogle,refeshToken }
