@@ -4,7 +4,8 @@ const SupplierShema = new Schema({
     name: {
         type: "string",
         required: true,
-    }
+    },
+    slug: String
     ,
     product: String
     ,
@@ -12,20 +13,24 @@ const SupplierShema = new Schema({
         type: [String]
     },
     price: Number,
-    Contact: String,
+    contact: String,
     isTaking: {
         type: Number,
         default: 0,
         enum: [0, 1]
 
     },
-    photoURl: String,
+    photoURL: String,
     createdAt: {
         type: Date,
         default: Date.now()
+    }, 
+    updatedAt: {
+        type: Date,
+        default: Date.now(),
     }
 
 })
 
-const SupplierModel= mongoose.model('suppliers' ,SupplierShema)
+const SupplierModel = mongoose.model('suppliers', SupplierShema)
 export default SupplierModel
