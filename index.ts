@@ -5,8 +5,10 @@ import userRouter from "./src/routers/user"
 import cors from "cors"
 
 import storage from './src/routers/storage'
-import {verifyToken} from './src/middleware/verifyToken'
- 
+import { verifyToken } from './src/middleware/verifyToken'
+
+
+import SupplierRouter from './src/routers/supplier'
 dotenv.config()
 
 
@@ -21,11 +23,13 @@ app.use(express.json())
 app.use(cors())
 
 
-app.use('/auth',userRouter)
+app.use('/auth', userRouter)
 
-app.use(verifyToken )
+app.use(verifyToken)
 
-app.use('/storage',storage)
+app.use('/storage', storage)
+app.use('/supplier', SupplierRouter)
+
 const connectDb = async () => {
 
     try {
