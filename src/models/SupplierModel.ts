@@ -20,16 +20,23 @@ const SupplierShema = new Schema({
         enum: [0, 1]
 
     },
+
+    email:String,
+    active:Number,
     photoURL: String,
     createdAt: {
         type: Date,
         default: Date.now()
-    }, 
+    },
     updatedAt: {
         type: Date,
         default: Date.now(),
     }
-
+    ,
+    isDeleted: {
+        type: Boolean,
+        default: false
+    }
 })
 
 const SupplierModel = mongoose.model('suppliers', SupplierShema)
