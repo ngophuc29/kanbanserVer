@@ -2,24 +2,24 @@ import SupplierModel from "../models/SupplierModel"
 
 const getSupplier = async (req: any, res: any) => {
 
-    const {page,pageSize} = req.query
+    const { page, pageSize } = req.query
 
     console.log(page, pageSize)
     try {
 
-        const skip=(page - 1) * pageSize
+        const skip = (page - 1) * pageSize
 
-        const tong=await SupplierModel.countDocuments()
+        const tong = await SupplierModel.countDocuments()
         console.log(tong)
-        const items = await SupplierModel.find({isDeleted:false })
-        .skip(skip)
-        .limit(pageSize)
+        const items = await SupplierModel.find({ isDeleted: false })
+            .skip(skip)
+            .limit(pageSize)
 
-        const total=await SupplierModel.countDocuments()
+        const total = await SupplierModel.countDocuments()
         res.status(200).json({
             message: "Supplier",
             // data: {items,total}
-            data: {items,total}
+            data: { items, total }
 
         })
     } catch (error: any) {
@@ -58,7 +58,7 @@ const updateSuppplier = async (req: any, res: any) => {
 
 
         await SupplierModel.findByIdAndUpdate(id, body)
-        
+
         res.status(200).json({
             message: "  Supplier updated !!!",
             data: []
@@ -73,13 +73,13 @@ const updateSuppplier = async (req: any, res: any) => {
 }
 
 const removeSuppplier = async (req: any, res: any) => {
- 
+
     const { id } = req.query
     try {
 
 
-        await SupplierModel.findByIdAndDelete(id )
-        
+        await SupplierModel.findByIdAndDelete(id)
+
         res.status(200).json({
             message: "  Supplier Remove !!!",
             data: []
@@ -92,4 +92,67 @@ const removeSuppplier = async (req: any, res: any) => {
         })
     }
 }
-export { getSupplier, addNew,updateSuppplier,removeSuppplier }
+const getForm = async (req: any, res: any) => {
+    try {
+        const form = {
+            title: 'Supplier',
+            layout: 'horizontal',
+            labelCol: 6,
+            wrapperCol: 18,
+            formItems: [
+                {
+                    key: 'name',
+                    value: 'name',
+                    label: 'Supplier Name',
+                    placeholder: "Enter your supplier name",
+                    type: 'default',
+                    required: true,
+                    message: 'Enter your supplier name'
+                },
+                {
+                    key: 'name',
+                    value: 'name',
+                    label: 'Supplier Name',
+                    placeholder: "Enter your supplier name",
+                    type: 'default',
+                    required: true,
+                    message: 'Enter your supplier name'
+                }
+                ,
+                {
+                    key: 'name',
+                    value: 'name',
+                    label: 'Supplier Name',
+                    placeholder: "Enter your supplier name",
+                    type: 'default',
+                    required: true,
+                    message: 'Enter your supplier name'
+                }
+                ,
+                {
+                    key: 'name',
+                    value: 'name',
+                    label: 'Supplier Name',
+                    placeholder: "Enter your supplier name",
+                    type: 'default',
+                    required: true,
+                    message: 'Enter your supplier name'
+                }
+            ]
+        }
+        res.status(200).json({
+            message: '',
+            data: form
+        }
+
+        )
+    } catch (error: any) {
+        res.status(404).json({
+
+            message: error.message,
+        }
+
+        )
+    }
+}
+export { getSupplier, addNew, updateSuppplier, removeSuppplier,getForm }
