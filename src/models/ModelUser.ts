@@ -15,6 +15,7 @@ const UserShema = new Schema({
         type: String,
         required: true
     },
+    photoUrl: String,
     createAt: {
         type: Date,
         default: Date.now()
@@ -24,11 +25,11 @@ const UserShema = new Schema({
         default: Date.now()
     }
     ,
-    rule:{
+    rule: {
         type: Number,
         default: 1
     }
 });
 
-const UserModel=mongoose.model("users",UserShema);
+const UserModel = mongoose.model("users", UserShema);
 export default UserModel
