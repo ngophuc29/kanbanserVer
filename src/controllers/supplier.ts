@@ -1,10 +1,11 @@
+import { supplierForm } from "../forms/suppliers"
 import SupplierModel from "../models/SupplierModel"
 
 const getSupplier = async (req: any, res: any) => {
 
     const { page, pageSize } = req.query
 
-    console.log(page, pageSize)
+    // console.log(page, pageSize)
     try {
 
         const skip = (page - 1) * pageSize
@@ -99,46 +100,8 @@ const getForm = async (req: any, res: any) => {
             layout: 'horizontal',
             labelCol: 6,
             wrapperCol: 18,
-            formItems: [
-                {
-                    key: 'name',
-                    value: 'name',
-                    label: 'Supplier Name',
-                    placeholder: "Enter your supplier name",
-                    type: 'default',
-                    required: true,
-                    message: 'Enter your supplier name'
-                },
-                {
-                    key: 'name',
-                    value: 'name',
-                    label: 'Supplier Name',
-                    placeholder: "Enter your supplier name",
-                    type: 'default',
-                    required: true,
-                    message: 'Enter your supplier name'
-                }
-                ,
-                {
-                    key: 'name',
-                    value: 'name',
-                    label: 'Supplier Name',
-                    placeholder: "Enter your supplier name",
-                    type: 'default',
-                    required: true,
-                    message: 'Enter your supplier name'
-                }
-                ,
-                {
-                    key: 'name',
-                    value: 'name',
-                    label: 'Supplier Name',
-                    placeholder: "Enter your supplier name",
-                    type: 'default',
-                    required: true,
-                    message: 'Enter your supplier name'
-                }
-            ]
+            formItems:  supplierForm
+                  
         }
         res.status(200).json({
             message: '',
