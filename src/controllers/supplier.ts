@@ -100,8 +100,8 @@ const getForm = async (req: any, res: any) => {
             layout: 'horizontal',
             labelCol: 6,
             wrapperCol: 18,
-            formItems:  supplierForm
-                  
+            formItems: supplierForm
+
         }
         res.status(200).json({
             message: '',
@@ -118,4 +118,52 @@ const getForm = async (req: any, res: any) => {
         )
     }
 }
-export { getSupplier, addNew, updateSuppplier, removeSuppplier,getForm }
+
+const getExportData = async (req: any, res: any) => {
+
+    const body = req.body
+    const { start, end } = req.query
+
+
+    const filter: any = {};
+
+    if (start && end) {
+        filter.createdAt = {
+            $lte: end,
+            $gte: start,
+        };
+    }
+    // console.log(page, pageSize)
+    try {
+        // console.log(body, start, end)
+        const items = await SupplierModel.find(filter);
+
+
+        const data: any = [];
+        if (items.length > 0) {
+            items.forEach((item: any) => {
+                const value: any = {};
+
+                body.forEach((key: string) => {
+                    value[`${key}`] = `${item._doc[`${key}`] ?? ''}`;
+                });
+
+                data.push(value);
+            });
+        }
+
+        res.status(200).json({
+            message: "Supplier",
+            // data: {items,total}
+            data: data
+
+        })
+    } catch (error: any) {
+
+
+        res.status(404).json({
+            message: error.message
+        })
+    }
+}
+export { getSupplier, addNew, updateSuppplier, removeSuppplier, getForm, getExportData }
