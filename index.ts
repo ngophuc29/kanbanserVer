@@ -9,6 +9,7 @@ import { verifyToken } from './src/middleware/verifyToken'
 
 
 import SupplierRouter from './src/routers/supplier'
+import ProductRouter from './src/routers/productRouter'
 dotenv.config()
 
 
@@ -29,6 +30,8 @@ app.use(verifyToken)
 
 app.use('/storage', storage)
 app.use('/supplier', SupplierRouter)
+app.use('/products', ProductRouter)
+
 
 const connectDb = async () => {
 
